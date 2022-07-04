@@ -1,0 +1,143 @@
+/*classic start we set the box sizing and margin-padding to take control*/
+body{
+    box-sizing: border-box;
+    margin:0;
+    padding: 0;
+}
+ul{
+    padding:0;
+}
+/*we set the img width 100% to strecth all images...*/
+img {
+    width: 100%;
+}
+
+/*flexbox*/
+
+.flexbox-section{
+    margin:50px;
+}
+
+.flexbox-list{
+    display:flex;
+    flex-wrap:wrap;
+}
+
+/*each element has 20% width 
+we have 4 element on each row 4*20 = 80. 
+100-80=20% for margin vertical
+Each element has 2 margin area(horizontal) so we have 4*2=8 margin area(hrizontal)
+20/8=2.5% for each margin left or right */
+.flexbox-item{
+    flex:0 0 20%;
+    margin:50px 2.5%;
+}
+/*first element has two element's area and two margin area
+so first element's width must be 20*2+2.5*2 = 45% */
+.flexbox-item:nth-child(1){
+    flex:45%;
+}
+/*we set first img's width*/
+.flexbox-item:nth-child(1) img{
+    width: 50%;
+}
+
+
+
+
+/* grid */
+
+.grid-section{
+    margin:50px;
+}
+/*we must divide the div to 4 columns. 
+Each column's width must be equal except the first element.
+We add gap between elements*/
+.grid-list{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap:50px 100px;   
+}
+/*first element have 2 elements' width. We can extend it via column start and column end*/
+.grid-item:nth-child(1) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.grid-item:nth-child(1) img {
+    width: 50%;
+}
+
+/*media quaries*/
+
+@media (min-width:601px) and (max-width:1024px){
+
+    /*same calculations for 601-1024 px*/
+
+    /*flexbox 601px-1024px*/
+    .flexbox-item {
+        flex: 0 0 30%;
+        margin: 50px calc(100%/60);
+    }
+
+    .flexbox-item:nth-child(1), .flexbox-item:nth-child(2){
+        flex: calc(140%/3);
+    }
+
+    .flexbox-item:nth-child(1) img, .flexbox-item:nth-child(2) img {
+        width: 50%;
+    }
+
+
+    /*grid 601px-1024px*/
+    /*we divide the div to 6 columns*/
+    .grid-list {
+        grid-template-columns: repeat(6, 1fr);
+        grid-gap: 30px 50px;
+
+    }/* each element has 2 columns' width*/
+    .grid-item{
+        grid-column:span 2;
+    }
+    
+    /*first and second element have 3 columns width*/
+    .grid-item:nth-child(1) {
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+    .grid-item:nth-child(2){
+        grid-column-start: 4;
+        grid-column-end: 7;
+    }
+    
+    .grid-item:nth-child(1) img, .grid-item:nth-child(2) img {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:600px) {
+
+    /*same calculations for max-width 600px*/
+    
+    /*flexbox max width 600px*/
+    .flexbox-item {
+        flex:80%;
+        margin: 30px 5%;
+    }
+    .flexbox-item:nth-child(1) img {
+        width: 100%;
+    }
+    
+    
+    /*grid max width 600px*/
+    /*grid-column is the short way of grid column-start and grid-column-end*/
+    .grid-item {
+        grid-column: 1/-1;   
+    }                   
+    .grid-item:nth-child(1){
+        grid-column: 1/-1;
+    }
+    .grid-item:nth-child(1) img {
+        width: 100%;
+    }
+    
+}
